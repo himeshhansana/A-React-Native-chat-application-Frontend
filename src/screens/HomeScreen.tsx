@@ -14,6 +14,7 @@ import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useLayoutEffect, useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
+import { useChatList } from "../socket/UseChatList";
 
 const chats = [
   {
@@ -88,12 +89,15 @@ export default function HomeScreen() {
   const navigation = useNavigation<HomeScreenProps>();
   const [search, setSearch] = useState("");
 
+  const chatList = useChatList();
+
   useLayoutEffect(() => {
     navigation.setOptions({
       header: () => (
         <View
-          className={`h-20 bg-white justify-center items-center flex-row shadow-2xl elevation-2xl ${Platform.OS === "ios" ? `py-5` : `py-0`
-            }`}
+          className={`h-20 bg-white justify-center items-center flex-row shadow-2xl elevation-2xl ${
+            Platform.OS === "ios" ? `py-5` : `py-0`
+          }`}
         >
           <View className="items-start flex-1 ms-3">
             <Text className="text-2xl font-bold">ChatApp</Text>
@@ -127,7 +131,7 @@ export default function HomeScreen() {
         navigation.navigate("SingleChatScreen", {
           chatId: 1,
           friendName: "Anjana",
-          lastSeenTime: "4:07pm",
+          lastSeenTime: "8:07 PM",
           profileImage: require("../../assets/avatar/avatar_1.png"),
         });
       }}

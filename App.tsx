@@ -14,6 +14,7 @@ import { UserRegistrationProvider } from "./src/components/UserContext";
 import { AlertNotificationRoot } from "react-native-alert-notification";
 import HomeTabs from "./src/screens/HomeTabs";
 import SingleChatScreen from "./src/screens/SingleChatScreen";
+import { WebSocketProvider } from "./src/socket/WebSocketProvider";
 
 export type RootStack = {
   SplashScreen: undefined;
@@ -35,8 +36,10 @@ export type RootStack = {
 const Stack = createNativeStackNavigator<RootStack>();
 
 export default function App() {
+  const USER_ID = 4; // Replace with actual user ID logic
   return (
     <AlertNotificationRoot>
+      <WebSocketProvider userId={USER_ID}>
       <ThemeProvider>
         <UserRegistrationProvider>
           <NavigationContainer>
@@ -84,6 +87,7 @@ export default function App() {
           </NavigationContainer>
         </UserRegistrationProvider>
       </ThemeProvider>
+      </WebSocketProvider>
     </AlertNotificationRoot>
   );
 }
