@@ -1,27 +1,30 @@
 import { useEffect, useState } from "react";
-import { Chat, WSResponse } from "./chat";
 import { useWebSocket } from "./WebSocketProvider";
+import { Chat, WSResponse } from "./chat";
 
-export function useChatList(): Chat[] {
+export function useSingleChat(friendId: number) {
   const { socket, sendMessage } = useWebSocket();
-  const [chatList, setChatList] = useState<Chat[]>([]);
+  const [messages, setMessage] = useState<Chat[]>([]);
 
   useEffect(() => {
     if (!socket) {
       return;
     }
-    sendMessage({ type: "get_chat_list" });
+    sendMessage({ type: "get_single_chat", friendId });
+
     const onMessage = (event: MessageEvent) => {
       const response: WSResponse = JSON.parse(event.data);
-      if (response.type === "friend_list") {
-        setChatList(response.payload);
+      if (response.type === "single_chat") {
+        setMessage(response.payload);
       }
     };
+
     socket.addEventListener("message", onMessage);
+
     return () => {
       socket.removeEventListener("message", onMessage);
     };
-  }, [socket]);
+  }, [socket, friendId]);
 
-  return chatList;
+  return messages;
 }

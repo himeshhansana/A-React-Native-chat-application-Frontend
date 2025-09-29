@@ -36,57 +36,62 @@ export type RootStack = {
 const Stack = createNativeStackNavigator<RootStack>();
 
 export default function App() {
-  const USER_ID = 4; // Replace with actual user ID logic
+  const USER_ID = 4; // can use AsyncStorage
   return (
     <AlertNotificationRoot>
       <WebSocketProvider userId={USER_ID}>
-      <ThemeProvider>
-        <UserRegistrationProvider>
-          <NavigationContainer>
-            <Stack.Navigator
-              initialRouteName="HomeScreen"
-              screenOptions={{
-                animation: "fade",
-              }}
-            >
-              <Stack.Screen
-                name="SplashScreen"
-                component={SplashScreen}
-                options={{ headerShown: false }}
-              />
+        <ThemeProvider>
+          <UserRegistrationProvider>
+            <NavigationContainer>
+              <Stack.Navigator
+                initialRouteName="HomeScreen"
+                screenOptions={{
+                  animation: "fade",
+                }}
+              >
+                <Stack.Screen
+                  name="SplashScreen"
+                  component={SplashScreen}
+                  options={{ headerShown: false }}
+                />
 
-              <Stack.Screen
-                name="SignUpScreen"
-                component={SignUpScreen}
-                options={{ headerShown: false }}
-              />
+                <Stack.Screen
+                  name="SignUpScreen"
+                  component={SignUpScreen}
+                  options={{ headerShown: false }}
+                />
 
-              <Stack.Screen
-                name="ContactScreen"
-                component={ContactScreen}
-                options={{ headerShown: false }}
-              />
+                <Stack.Screen
+                  name="ContactScreen"
+                  component={ContactScreen}
+                  options={{ headerShown: false }}
+                />
 
-              <Stack.Screen
-                name="AvatarScreen"
-                component={AvatarScreen}
-                options={{ headerShown: false }}
-              />
+                <Stack.Screen
+                  name="AvatarScreen"
+                  component={AvatarScreen}
+                  options={{ headerShown: false }}
+                />
 
-              <Stack.Screen
-                name="SignInScreen"
-                component={SignInScreen}
-                options={{ headerShown: false }}
-              />
-              <Stack.Screen name="HomeScreen" component={HomeTabs} options={{ headerShown: false }} />
-              <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
-              <Stack.Screen name="SingleChatScreen" component={SingleChatScreen} />
-
-
-            </Stack.Navigator>
-          </NavigationContainer>
-        </UserRegistrationProvider>
-      </ThemeProvider>
+                <Stack.Screen
+                  name="SignInScreen"
+                  component={SignInScreen}
+                  options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                  name="HomeScreen"
+                  component={HomeTabs}
+                  options={{ headerShown: false }}
+                />
+                <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
+                <Stack.Screen
+                  name="SingleChatScreen"
+                  component={SingleChatScreen}
+                />
+              </Stack.Navigator>
+            </NavigationContainer>
+          </UserRegistrationProvider>
+        </ThemeProvider>
       </WebSocketProvider>
     </AlertNotificationRoot>
   );
