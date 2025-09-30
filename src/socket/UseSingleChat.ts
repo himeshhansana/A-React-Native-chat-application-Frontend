@@ -5,12 +5,13 @@ import { Chat, WSResponse } from "./chat";
 export function useSingleChat(friendId: number) {
   const { socket, sendMessage } = useWebSocket();
   const [messages, setMessage] = useState<Chat[]>([]);
-
+  const [friend, setFriend] = useState<any>(null);
   useEffect(() => {
     if (!socket) {
       return;
     }
     sendMessage({ type: "get_single_chat", friendId });
+    sendMessage({ type: "get_friend_data", friendId });
 
     const onMessage = (event: MessageEvent) => {
       const response: WSResponse = JSON.parse(event.data);
@@ -18,6 +19,10 @@ export function useSingleChat(friendId: number) {
         setMessage(response.payload);
       }
 
+      if (response.type === "friend_data") {
+        setFriend(response.payload);
+
+      }
 
       if (response.type === "new_message" && response.payload.to.id === friendId) {
         console.log(response.payload);
@@ -32,5 +37,5 @@ export function useSingleChat(friendId: number) {
     };
   }, [socket, friendId]);
 
-  return messages;
+  return { messages: messages, friend: friend };
 }

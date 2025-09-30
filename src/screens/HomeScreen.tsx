@@ -34,12 +34,16 @@ export default function HomeScreen() {
     });
   });
 
-  const filteredChats = chatlist.filter((chat) => {
+  const filteredChats = [...chatlist].filter((chat) => {
     return (
       chat.friendName.toLowerCase().includes(search.toLowerCase()) ||
       chat.lastMessage.toLowerCase().includes(search.toLowerCase())
     );
-  });
+  }).sort(
+    (a, b) =>
+      new Date(b.lastTimeStamp).getTime() -
+      new Date(a.lastTimeStamp).getTime()
+  );
 
   const renderItem = ({ item }: any) => (
     <TouchableOpacity

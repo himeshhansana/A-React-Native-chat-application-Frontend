@@ -1,3 +1,4 @@
+
 import {
   NativeStackNavigationProp,
   NativeStackScreenProps,
@@ -40,7 +41,9 @@ export default function SingleChatScreen({
   navigation,
 }: SingleChatScreenProps) {
   const { chatId, friendName, lastSeenTime, profileImage } = route.params;
-  const messages = useSingleChat(chatId); // chatId == friendId
+  const singleChat = useSingleChat(chatId); // chatId == friendId
+  const messages = singleChat.messages;
+  const friend = singleChat.friend;
   const sendMessage = useSendChat();
   const [input, setInput] = useState("");
 
@@ -49,14 +52,28 @@ export default function SingleChatScreen({
       title: "",
       headerLeft: () => (
         <View className="flex-row items-center gap-2">
+          <TouchableOpacity
+            className="items-center justify-center"
+            onPress={() => {
+              navigation.goBack();
+            }}
+          >
+            <Ionicons name="arrow-back-sharp" size={24} color="black" />
+          </TouchableOpacity>
           <Image
             source={{ uri: profileImage }}
             className="p-1 border-2 border-gray-400 rounded-full h-14 w-14"
           />
           <View className="space-y-2 ">
-            <Text className="text-2xl font-bold">{friendName}</Text>
+            <Text className="text-2xl font-bold">
+              {friend?.firstName} {friend?.lastName}
+            </Text>
             <Text className="text-xs italic font-bold text-gray-500">
-              Last seen {lastSeenTime}
+              {friend?.status === "ONLINE"
+                ? "Online"
+                : `Last seen ${formatChatTime(
+                  friend?.updatedAt ?? ""
+                )}`}
             </Text>
           </View>
         </View>
@@ -67,21 +84,22 @@ export default function SingleChatScreen({
         </TouchableOpacity>
       ),
     });
-  }, [navigation]);
+  }, [navigation, friend]);
 
   const renderItem = ({ item }: { item: Chat }) => {
     const isMe = item.from.id !== chatId;
-
     return (
       <View
         className={`my-1 px-3 py-2 max-w-[75%] ${isMe
-          ? `self-end bg-green-900 rounded-tl-xl rounded-bl-xl rounded-br-xl`
-          : `rounded-tr-xl rounded-bl-xl rounded-br-xl self-start bg-gray-700`
+            ? `self-end bg-green-900 rounded-tl-xl rounded-bl-xl rounded-br-xl`
+            : `rounded-tr-xl rounded-bl-xl rounded-br-xl self-start bg-gray-700`
           }`}
       >
         <Text className={`text-white text-base`}>{item.message}</Text>
         <View className="flex-row items-center justify-end mt-1">
-          <Text className={`text-white italic text-xs me-2`}>{formatChatTime(item.createdAt)}</Text>
+          <Text className={`text-white italic text-xs me-2`}>
+            {formatChatTime(item.createdAt)}
+          </Text>
           {isMe && (
             <Ionicons
               name={
