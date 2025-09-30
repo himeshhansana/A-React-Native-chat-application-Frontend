@@ -21,6 +21,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { useSingleChat } from "../socket/UseSingleChat";
 import { Chat } from "../socket/chat";
 import { formatChatTime } from "../util/DateFormatter";
+import { useSendChat } from "../socket/UseSendChat";
 
 type Message = {
   id: number;
@@ -40,6 +41,7 @@ export default function SingleChatScreen({
 }: SingleChatScreenProps) {
   const { chatId, friendName, lastSeenTime, profileImage } = route.params;
   const messages = useSingleChat(chatId); // chatId == friendId
+  const sendMessage = useSendChat();
   const [input, setInput] = useState("");
 
   useLayoutEffect(() => {
@@ -69,13 +71,13 @@ export default function SingleChatScreen({
 
   const renderItem = ({ item }: { item: Chat }) => {
     const isMe = item.from.id !== chatId;
+
     return (
       <View
-        className={`my-1 px-3 py-2 max-w-[75%] ${
-          isMe
-            ? `self-end bg-green-900 rounded-tl-xl rounded-bl-xl rounded-br-xl`
-            : `rounded-tr-xl rounded-bl-xl rounded-br-xl self-start bg-gray-700`
-        }`}
+        className={`my-1 px-3 py-2 max-w-[75%] ${isMe
+          ? `self-end bg-green-900 rounded-tl-xl rounded-bl-xl rounded-br-xl`
+          : `rounded-tr-xl rounded-bl-xl rounded-br-xl self-start bg-gray-700`
+          }`}
       >
         <Text className={`text-white text-base`}>{item.message}</Text>
         <View className="flex-row items-center justify-end mt-1">
@@ -86,8 +88,8 @@ export default function SingleChatScreen({
                 item.status === "READ"
                   ? "checkmark-done-sharp"
                   : item.status === "DELIVERED"
-                  ? "checkmark-done-sharp"
-                  : "checkmark"
+                    ? "checkmark-done-sharp"
+                    : "checkmark"
               }
               size={20}
               color={item.status === "READ" ? "#0284c7" : "#9ca3af"}
@@ -98,18 +100,12 @@ export default function SingleChatScreen({
     );
   };
 
-  const sendMessage = () => {
-    if (input.trim()) {
-      const newMsg: Message = {
-        id: Date.now(),
-        text: input,
-        sender: "me",
-        time: Date.now().toString(),
-        status: "sent",
-      };
-      setInput("");
+  const handleSendChat = () => {
+    if (!input.trim()) {
+      return;
     }
-    return !input.trim();
+    sendMessage(chatId, input);
+    setInput("");
   };
 
   return (
@@ -120,7 +116,7 @@ export default function SingleChatScreen({
       <StatusBar hidden={false} />
       <KeyboardAvoidingView
         className="flex-1"
-        keyboardVerticalOffset={Platform.OS === "android" ? 0 : 50}
+        keyboardVerticalOffset={Platform.OS === "android" ? 90 : 50}
         behavior={Platform.OS === "android" ? "padding" : "height"}
       >
         <FlatList
@@ -141,7 +137,7 @@ export default function SingleChatScreen({
           />
           <TouchableOpacity
             className="items-center justify-center bg-green-600 rounded-full w-14 h-14"
-            onPress={sendMessage}
+            onPress={handleSendChat}
           >
             <Ionicons name="send" size={24} color="white" />
           </TouchableOpacity>

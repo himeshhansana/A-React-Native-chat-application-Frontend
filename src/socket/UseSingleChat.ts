@@ -17,6 +17,12 @@ export function useSingleChat(friendId: number) {
       if (response.type === "single_chat") {
         setMessage(response.payload);
       }
+
+
+      if (response.type === "new_message" && response.payload.to.id === friendId) {
+        console.log(response.payload);
+        setMessage((prev) => [response.payload, ...prev]);
+      }
     };
 
     socket.addEventListener("message", onMessage);
