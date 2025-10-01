@@ -24,13 +24,6 @@ import { Chat } from "../socket/chat";
 import { formatChatTime } from "../util/DateFormatter";
 import { useSendChat } from "../socket/UseSendChat";
 
-type Message = {
-  id: number;
-  text: string;
-  sender: "me" | "friend";
-  time: string;
-  status?: "sent" | "delivered" | "read";
-};
 
 type SingleChatScreenProps = NativeStackScreenProps<
   RootStack,
@@ -60,13 +53,16 @@ export default function SingleChatScreen({
           >
             <Ionicons name="arrow-back-sharp" size={24} color="black" />
           </TouchableOpacity>
-          <Image
-            source={{ uri: profileImage }}
-            className="p-1 border-2 border-gray-400 rounded-full h-14 w-14"
-          />
+          <TouchableOpacity className="items-center justify-center border-gray-300 rounded-full h-14 w-14 border-1">
+            <Image
+              source={{ uri: profileImage }}
+              className="w-12 h-12 rounded-full"
+            />
+          </TouchableOpacity>
+
           <View className="space-y-2 ">
             <Text className="text-2xl font-bold">
-              {friend?.firstName} {friend?.lastName}
+              {friend ? friend.firstName + " " + friend.lastName : friendName}
             </Text>
             <Text className="text-xs italic font-bold text-gray-500">
               {friend?.status === "ONLINE"
@@ -91,8 +87,8 @@ export default function SingleChatScreen({
     return (
       <View
         className={`my-1 px-3 py-2 max-w-[75%] ${isMe
-            ? `self-end bg-green-900 rounded-tl-xl rounded-bl-xl rounded-br-xl`
-            : `rounded-tr-xl rounded-bl-xl rounded-br-xl self-start bg-gray-700`
+          ? `self-end bg-green-900 rounded-tl-xl rounded-bl-xl rounded-br-xl`
+          : `rounded-tr-xl rounded-bl-xl rounded-br-xl self-start bg-gray-700`
           }`}
       >
         <Text className={`text-white text-base`}>{item.message}</Text>

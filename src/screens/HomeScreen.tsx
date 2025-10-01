@@ -57,8 +57,23 @@ export default function HomeScreen() {
         })
       }}
     >
-      <Image source={{ uri: item.profileImage }} className='w-12 h-12 rounded-full' />
-      <View className='flex-1'>
+      <TouchableOpacity className="items-center justify-center border-gray-300 rounded-full h-14 w-14 border-1">
+        {item.profileImage ? (
+          <Image
+            source={{ uri: item.profileImage }}
+            className="rounded-full h-14 w-14"
+          />
+        ) : (
+          <Image
+            source={{
+              uri: `https://ui-avatars.com/api/?name=${item.friendName.replace(" ", "+")}&background=random`
+            }}
+            className="rounded-full h-14 w-14"
+          />
+        )}
+      </TouchableOpacity>
+
+      <View className='flex-1 ms-3'>
         <View className='flex-row justify-between'>
           <Text className='text-xl font-bold text-gray-600'
             numberOfLines={1} ellipsizeMode='tail'>{item.friendName}</Text>
@@ -87,7 +102,8 @@ export default function HomeScreen() {
         <FlatList data={filteredChats} renderItem={renderItem} contentContainerStyle={{ paddingBottom: 80 }} />
       </View>
       <View className='absolute bg-green-500 bottom-10 right-6 rounded-3xl'>
-        <TouchableOpacity className='items-center justify-center w-20 h-20 rounded-3xl'>
+        <TouchableOpacity className='items-center justify-center w-20 h-20 rounded-3xl'
+          onPress={() => navigation.navigate("NewChatScreen")}>
           <Ionicons name='chatbox-ellipses' size={24} color='black' />
         </TouchableOpacity>
       </View>

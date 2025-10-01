@@ -15,6 +15,7 @@ import { AlertNotificationRoot } from "react-native-alert-notification";
 import HomeTabs from "./src/screens/HomeTabs";
 import SingleChatScreen from "./src/screens/SingleChatScreen";
 import { WebSocketProvider } from "./src/socket/WebSocketProvider";
+import NewChatScreen from "./src/screens/NewChatScreen";
 
 export type RootStack = {
   SplashScreen: undefined;
@@ -31,6 +32,7 @@ export type RootStack = {
     lastSeenTime: string;
     profileImage: string;
   };
+  NewChatScreen: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStack>();
@@ -83,11 +85,19 @@ export default function App() {
                   component={HomeTabs}
                   options={{ headerShown: false }}
                 />
-                <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
                 <Stack.Screen
                   name="SingleChatScreen"
                   component={SingleChatScreen}
                 />
+                <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
+                <Stack.Screen name="SettingScreen" component={SettingScreen} />
+
+                <Stack.Screen
+                  name="NewChatScreen"
+                  component={NewChatScreen}
+                 
+                />
+
               </Stack.Navigator>
             </NavigationContainer>
           </UserRegistrationProvider>

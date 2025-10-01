@@ -11,10 +11,10 @@ export default function ChatsScreen() {
     return (
         <Stack.Navigator>
             <Stack.Screen name="HomeScreen" component={HomeScreen} />
-            <Stack.Screen name="SettingsScreen" component={SettingsScreen} />
+            {/* <Stack.Screen name="SettingsScreen" component={SettingsScreen} />
             <Stack.Screen name="NewChatScreen" component={NewChatScreen} />
             <Stack.Screen name="CallsScreen" component={CallsScreen} />
-            <Stack.Screen name="StatusScreen" component={StatusScreen} />
+            <Stack.Screen name="StatusScreen" component={StatusScreen} /> */}
         </Stack.Navigator>
     )
 }

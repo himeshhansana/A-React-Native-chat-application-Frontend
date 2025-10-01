@@ -14,6 +14,7 @@ export interface Chat {
     id: number;
     friendId: number;
     friendName: string;
+    friendFirstName: string;
     lastMessage: string;
     lastTimeStamp: string;
     unreadCount: number;
