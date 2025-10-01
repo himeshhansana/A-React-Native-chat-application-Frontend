@@ -54,6 +54,11 @@ export default function HomeScreen() {
           friendName: item.friendName,
           lastSeenTime: formatChatTime(item.lastTimeStamp),
           profileImage: item.profileImage
+            ? item.profileImage
+            : `https://ui-avatars.com/api/?name=FirstName+LastName=${item.friendName.replace(
+              "",
+              "+"
+            )}&background=random`,
         })
       }}
     >
