@@ -21,14 +21,14 @@ export default function HomeTabs() {
             tabBarActiveTintColor: 'green',
             tabBarInactiveTintColor: 'black',
             headerShown: false,
-            tabBarStyle:{
-                height:90,
-                padding:8
+            tabBarStyle: {
+                height: 90,
+                padding: 8
             }
         })}>
+            <Tabs.Screen name="Chats" component={ChatsScreen} options={{ headerShown: false }} />
             <Tabs.Screen name="Status" component={StatusScreen} />
             <Tabs.Screen name="Calls" component={CallsScreen} />
-            <Tabs.Screen name="Chats" component={ChatsScreen} options={{ headerShown: false }} />
             <Tabs.Screen name="Settings" component={SettingsScreen} />
         </Tabs.Navigator>
     );

@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, TextInput, FlatList, Image } from 'react-native';
+import { View, Text, TouchableOpacity, TextInput, FlatList, Image, Modal, Pressable, Platform } from 'react-native';
 import React, { useLayoutEffect, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -14,25 +14,88 @@ type HomeScreenProps = NativeStackNavigationProp<RootStack, "HomeScreen">;
 export default function HomeScreen() {
   const navigation = useNavigation<HomeScreenProps>();
   const [search, setSearch] = useState("");
-
   const chatlist = useChatList();
+  const [isModalVisible, setModalVisible] = useState(false);
 
   useLayoutEffect(() => {
     navigation.setOptions({
       title: "ChatApp",
       headerTitleStyle: { fontWeight: "bold", fontSize: 24 },
-      headerRight: () => (
-        <View className='flex-row space-x-4'>
-          <TouchableOpacity>
-            <Ionicons name='camera' size={24} color='black' />
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Ionicons name='ellipsis-vertical' size={24} color='black' />
-          </TouchableOpacity>
+      header: () => (
+        <View
+          className={`h-20 bg-white justify-center items-center flex-row shadow-2xl elevation-2xl ${Platform.OS === "android" ? `py-5` : `py-0`
+            }`}
+        >
+          <View className="items-start flex-1 mt-5 ms-3">
+            <Text className="text-2xl font-bold">ChatApp</Text>
+          </View>
+          <View className="me-3">
+            <View className="flex-row mt-5 space-x-4">
+              <TouchableOpacity className="me-5">
+                <Ionicons name="camera" size={26} color="black" />
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => setModalVisible(true)}>
+                <Ionicons name="ellipsis-vertical" size={24} color="black" />
+              </TouchableOpacity>
+              <Modal
+                animationType="fade"
+                visible={isModalVisible}
+                transparent={true}
+                onRequestClose={() => setModalVisible(false)}
+
+              >
+                <Pressable
+                  className="flex-1 bg-transparent"
+                  onPress={() => {
+                    setModalVisible(false); // modal close when press outside
+                  }}
+                >
+                  <Pressable
+                    className="bg-red-100"
+                    onPress={(e) => {
+                      e.stopPropagation(); // prevent modal close inside of the modal
+                    }}
+                  >
+                    {/* root modal view */}
+                    <View className="items-end justify-end p-5">
+                      {/* content view */}
+
+                      <View
+                        className="p-5 bg-white w-80 rounded-3xl"
+                        style={{
+                          shadowColor: "#000",
+                          shadowOffset: { width: 0, height: 4 },
+                          shadowOpacity: 0.15,
+                          shadowRadius: 8,
+                          elevation: 6,
+                        }}
+                      >
+                        {/* Settings */}
+                        <TouchableOpacity className="flex-row items-center justify-between py-4 border-b border-gray-200">
+                          <View className="flex-row items-center space-x-3">
+                            <Ionicons name="settings-outline" size={28} color="#4B5563" />
+                            <Text className="text-base font-bold text-gray-800">   Settings</Text>
+                          </View>
+                        </TouchableOpacity>
+
+                        {/* Profile */}
+                        <TouchableOpacity className="flex-row items-center justify-between py-4">
+                          <View className="flex-row items-center mt-3 space-x-3">
+                            <Ionicons name="person-circle-outline" size={28} color="#4B5563" />
+                            <Text className="text-base font-bold text-gray-800">   My Profile</Text>
+                          </View>
+                        </TouchableOpacity>
+                      </View>
+                    </View>
+                  </Pressable>
+                </Pressable>
+              </Modal>
+            </View>
+          </View>
         </View>
-      )
+      ),
     });
-  });
+  }, [navigation, isModalVisible]);
 
   const filteredChats = [...chatlist].filter((chat) => {
     return (
