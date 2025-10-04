@@ -1,32 +1,16 @@
 import { AntDesign } from "@expo/vector-icons";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useState } from "react";
-import {
-  Image,
-  KeyboardAvoidingView,
-  Platform,
-  Pressable,
-  StatusBar,
-  Text,
-  TextInput,
-  View,
-} from "react-native";
-
-import CountryPicker, {
-  Country,
-  CountryCode,
-} from "react-native-country-picker-modal";
-
+import { Image, KeyboardAvoidingView, Platform, Pressable, StatusBar, Text, TextInput, View, } from "react-native";
+import CountryPicker, { Country, CountryCode, } from "react-native-country-picker-modal";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { RootStack } from "../../App";
 import { useNavigation } from "@react-navigation/native";
 import { useUserRegistration } from "../components/UserContext";
-import {
-  ALERT_TYPE,
-  AlertNotificationRoot,
-  Toast,
-} from "react-native-alert-notification";
+import { ALERT_TYPE, AlertNotificationRoot, Toast, } from "react-native-alert-notification";
 import { validateCountryCode, validatePhoneNo } from "../util/Validation";
+
+
 type ContactProps = NativeStackNavigationProp<RootStack, "ContactScreen">;
 
 export default function ContactScreen() {
@@ -41,13 +25,13 @@ export default function ContactScreen() {
   const [phoneNo, setPhoneNo] = useState("");
 
   return (
-    <SafeAreaView className="flex-1 bg-white items-center">
+    <SafeAreaView className="items-center flex-1 bg-white">
       <StatusBar hidden={true} />
       <KeyboardAvoidingView
         behavior={Platform.OS === "android" ? "padding" : "height"}
         keyboardVerticalOffset={Platform.OS === "android" ? 100 : 100}
       >
-        <View className="p-5 items-center flex-1">
+        <View className="items-center flex-1 p-5">
           <View>
             <Image
               source={require("../../assets/logo.png")}
@@ -55,13 +39,13 @@ export default function ContactScreen() {
             />
           </View>
           <View>
-            <Text className="text-slate-600 font-bold">
+            <Text className="font-bold text-slate-600">
               We use your contacts to help you find friends who are already on
               the app. Your contacts stay private.
             </Text>
           </View>
-          <View className="mt-5 w-full">
-            <View className="border-b-2 border-b-green-600 justify-center items-center flex-row h-14 mb-3">
+          <View className="w-full mt-5">
+            <View className="flex-row items-center justify-center mb-3 border-b-2 border-b-green-600 h-14">
               <CountryPicker
                 countryCode={countryCode}
                 withFilter
@@ -86,7 +70,7 @@ export default function ContactScreen() {
                 style={{ marginTop: 5 }}
               />
             </View>
-            <View className="mt-2 flex flex-row justify-center">
+            <View className="flex flex-row justify-center mt-2">
               <TextInput
                 inputMode="tel"
                 className="h-16 font-bold text-lg border-y-2 border-y-green-600 w-[18%]"
@@ -108,9 +92,9 @@ export default function ContactScreen() {
               />
             </View>
           </View>
-          <View className="mt-16 w-full">
+          <View className="w-full mt-16">
             <Pressable
-              className="justify-center items-center bg-green-600 w-full h-14 rounded-full"
+              className="items-center justify-center w-full bg-green-600 rounded-full h-14"
               onPress={() => {
                 const validCountryCode = validateCountryCode(callingCode);
                 const validPhoneNo = validatePhoneNo(phoneNo);

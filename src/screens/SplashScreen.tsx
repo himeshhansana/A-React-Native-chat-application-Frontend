@@ -13,36 +13,37 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStack } from "../../App";
 import { runOnJS } from "react-native-worklets";
 import { useTheme } from "../theme/ThemeProvider";
+import { useWebSocketPing } from "../socket/UseWebSocketPing";
 
 type Props = NativeStackNavigationProp<RootStack, "SplashScreen">;
 
 export default function SplashScreen() {
   const navigation = useNavigation<Props>();
   const opacity = useSharedValue(0);
-
+  useWebSocketPing(60000); // 1000 * 60 * 4
   useEffect(() => {
     opacity.value = withTiming(1, { duration: 3000 });
-    const timer = setTimeout(() => {
-      navigation.replace("SignUpScreen");
-    }, 3000);
+    // const timer = setTimeout(() => {
+    //   navigation.replace("SignUpScreen");
+    // }, 3000);
 
-    return () => {
-      clearTimeout(timer);
-    };
+    // return () => {
+    //   clearTimeout(timer);
+    // };
   }, [navigation, opacity]);
 
   const animatedStyle = useAnimatedStyle(() => {
     return { opacity: opacity.value };
   });
 
-  const {applied} = useTheme();
+  const { applied } = useTheme();
   const logo =
     applied === "light"
       ? require("../../assets/logo-dark.png")
       : require("../../assets/logo.png");
 
   return (
-    <SafeAreaView className="flex-1 justify-center items-center bg-slate-50 ">
+    <SafeAreaView className="items-center justify-center flex-1 bg-slate-50 ">
       <StatusBar hidden={true} />
       <CircleShape
         width={200}
@@ -61,14 +62,11 @@ export default function SplashScreen() {
         leftValue={90}
       />
       <Animated.View style={animatedStyle}>
-        <Image
-          source={logo}
-          style={{ height: 200, width: 220 }}
-        />
+        <Image source={logo} style={{ height: 200, width: 220 }} />
       </Animated.View>
 
       <Animated.View className="absolute bottom-10" style={animatedStyle}>
-        <View className="justify-center items-center">
+        <View className="items-center justify-center">
           <Text className="text-xs font-bold text-slate-600 ">
             POWERED BY: {process.env.EXPO_PUBLIC_APP_OWNER}
           </Text>

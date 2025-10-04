@@ -27,9 +27,9 @@ export default function HomeTabs() {
             }
         })}>
             <Tabs.Screen name="Chats" component={ChatsScreen} options={{ headerShown: false }} />
-            <Tabs.Screen name="Status" component={StatusScreen} />
-            <Tabs.Screen name="Calls" component={CallsScreen} />
-            <Tabs.Screen name="Settings" component={SettingsScreen} />
+            <Tabs.Screen name="Status" component={StatusScreen} options={{ headerShown: true }} />
+            <Tabs.Screen name="Calls" component={CallsScreen} options={{ headerShown: true }} />
+            <Tabs.Screen name="Settings" component={SettingsScreen} options={{ headerShown: true }} />
         </Tabs.Navigator>
     );
 }

@@ -1,13 +1,14 @@
 import { View, Text, TouchableOpacity, TextInput, FlatList, Image, Modal, Pressable, Platform } from 'react-native';
-import React, { useLayoutEffect, useState } from 'react';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RootStack } from '../../App';
-import { useNavigation } from '@react-navigation/native';
-import Ionicons from '@expo/vector-icons/Ionicons';
-import { useChatList } from '../socket/UseChatList';
-import { Chat } from '../socket/chat';
-import { formatChatTime } from '../util/DateFormatter';
+import { RootStack } from "../../App";
+import { useNavigation } from "@react-navigation/native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { useContext, useLayoutEffect, useState } from "react";
+import { Ionicons } from "@expo/vector-icons";
+import { useChatList } from "../socket/UseChatList";
+import { formatChatTime } from "../util/DateFormatter";
+import { Chat } from "../socket/chat";
+import { AuthContext } from "../components/AuthProvider"
 
 type HomeScreenProps = NativeStackNavigationProp<RootStack, "HomeScreen">;
 
@@ -16,21 +17,20 @@ export default function HomeScreen() {
   const [search, setSearch] = useState("");
   const chatlist = useChatList();
   const [isModalVisible, setModalVisible] = useState(false);
+  const auth = useContext(AuthContext);
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      title: "ChatApp",
-      headerTitleStyle: { fontWeight: "bold", fontSize: 24 },
       header: () => (
         <View
-          className={`h-20 bg-white justify-center items-center flex-row shadow-2xl elevation-2xl ${Platform.OS === "android" ? `py-5` : `py-0`
+          className={`h-22 bg-white justify-center items-center flex-row shadow-2xl elevation-2xl ${Platform.OS === "android" ? `py-5` : `py-0`
             }`}
         >
-          <View className="items-start flex-1 mt-5 ms-3">
+          <View className="items-start flex-1 mt-4 ms-3">
             <Text className="text-2xl font-bold">ChatApp</Text>
           </View>
           <View className="me-3">
-            <View className="flex-row mt-5 space-x-4">
+            <View className="flex-row mt-4 space-x-4">
               <TouchableOpacity className="me-5">
                 <Ionicons name="camera" size={26} color="black" />
               </TouchableOpacity>
@@ -51,38 +51,50 @@ export default function HomeScreen() {
                   }}
                 >
                   <Pressable
-                    className="bg-red-100"
+                    className="bg-white-100"
                     onPress={(e) => {
                       e.stopPropagation(); // prevent modal close inside of the modal
                     }}
                   >
                     {/* root modal view */}
-                    <View className="items-end justify-end p-5">
+                    <View className="items-end justify-end p-6">
                       {/* content view */}
 
                       <View
-                        className="p-5 bg-white w-80 rounded-3xl"
+                        className="p-4 bg-white w-50 rounded-3xl"
                         style={{
                           shadowColor: "#000",
-                          shadowOffset: { width: 0, height: 4 },
-                          shadowOpacity: 0.15,
-                          shadowRadius: 8,
-                          elevation: 6,
+                          shadowOffset: { width: 0, height: 2 },
+                          shadowOpacity: 0.25,
+                          shadowRadius: 3.84,
+                          elevation: 5,
+
                         }}
                       >
                         {/* Settings */}
-                        <TouchableOpacity className="flex-row items-center justify-between py-4 border-b border-gray-200">
+                        <TouchableOpacity className="flex-row items-center justify-between py-2 border-b border-gray-200"
+                          onPress={() => { navigation.navigate("SettingScreen"); setModalVisible(false); }}>
                           <View className="flex-row items-center space-x-3">
                             <Ionicons name="settings-outline" size={28} color="#4B5563" />
-                            <Text className="text-base font-bold text-gray-800">   Settings</Text>
+                            <Text className="text-base font-bold text-gray-800">  Settings</Text>
                           </View>
                         </TouchableOpacity>
 
                         {/* Profile */}
-                        <TouchableOpacity className="flex-row items-center justify-between py-4">
+                        <TouchableOpacity className="flex-row items-center justify-between py-2 border-b border-gray-200"
+                          onPress={() => { navigation.navigate("ProfileScreen"); setModalVisible(false); }}>
                           <View className="flex-row items-center mt-3 space-x-3">
                             <Ionicons name="person-circle-outline" size={28} color="#4B5563" />
-                            <Text className="text-base font-bold text-gray-800">   My Profile</Text>
+                            <Text className="text-base font-bold text-gray-800">  My Profile</Text>
+                          </View>
+                        </TouchableOpacity>
+
+                        {/* Log Out */}
+                        <TouchableOpacity className="flex-row items-center justify-between py-2 border-b border-gray-200"
+                          onPress={() => { if (auth) auth.signOut(); }}>
+                          <View className="flex-row items-center mt-3 space-x-3">
+                            <Ionicons name="log-out-outline" size={28} color="#4B5563" />
+                            <Text className="text-base font-bold text-gray-800">  Log Out</Text>
                           </View>
                         </TouchableOpacity>
                       </View>
@@ -118,11 +130,8 @@ export default function HomeScreen() {
           lastSeenTime: formatChatTime(item.lastTimeStamp),
           profileImage: item.profileImage
             ? item.profileImage
-            : `https://ui-avatars.com/api/?name=FirstName+LastName=${item.friendName.replace(
-              "",
-              "+"
-            )}&background=random`,
-        })
+            : `https://ui-avatars.com/api/?name=FirstName+LastName=${item.friendName.replace("", "+")}&background=random`,
+        });
       }}
     >
       <TouchableOpacity className="items-center justify-center border-gray-300 rounded-full h-14 w-14 border-1">
@@ -134,7 +143,7 @@ export default function HomeScreen() {
         ) : (
           <Image
             source={{
-              uri: `https://ui-avatars.com/api/?name=${item.friendName.replace(" ", "+")}&background=random`
+              uri: `https://ui-avatars.com/api/?name=${item.friendName.replace(" ", "+")}&background=random`,
             }}
             className="rounded-full h-14 w-14"
           />

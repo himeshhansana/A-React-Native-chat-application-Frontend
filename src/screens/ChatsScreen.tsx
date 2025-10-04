@@ -16,5 +16,5 @@ export default function ChatsScreen() {
             <Stack.Screen name="CallsScreen" component={CallsScreen} />
             <Stack.Screen name="StatusScreen" component={StatusScreen} /> */}
         </Stack.Navigator>
-    )
+    );
 }

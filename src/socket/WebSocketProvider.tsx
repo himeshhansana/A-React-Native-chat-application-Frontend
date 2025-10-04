@@ -20,7 +20,10 @@ export const WebSocketProvider: React.FC<{
   const [isConnected, setConnected] = useState(false);
   const socketRef = useRef<WebSocket | null>(null);
   useEffect(() => {
-    if (socketRef.current && socketRef.current.readyState === WebSocket.OPEN) {
+    if (
+      userId === 0 ||
+      (socketRef.current && socketRef.current.readyState === WebSocket.OPEN)
+    ) {
       return;
     }
     const socket = new WebSocket(
@@ -30,11 +33,14 @@ export const WebSocketProvider: React.FC<{
     socketRef.current = socket;
 
     socket.onopen = () => {
-      console.log("WebSocket connectedd...");
+      console.log(new Date().toLocaleTimeString());
+
+      console.log("WebSocket connected...");
       setConnected(true);
     };
 
     socket.onclose = () => {
+      console.log(new Date().toLocaleTimeString());
       console.log("WebSocket disconnected...");
       setConnected(false);
     };
