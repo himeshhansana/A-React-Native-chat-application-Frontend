@@ -5,6 +5,9 @@ import ChatsScreen from "./ChatsScreen";
 import StatusScreen from "./StatusScreen";
 import SettingsScreen from "./SettingScreen";
 
+
+import { Platform } from "react-native";
+
 const Tabs = createBottomTabNavigator();
 export default function HomeTabs() {
     return (
@@ -27,6 +30,8 @@ export default function HomeTabs() {
             }
         })}>
             <Tabs.Screen name="Chats" component={ChatsScreen} options={{ headerShown: false }} />
+            {/* <Tabs.Screen name="Chats" component={ChatsScreen} options={{ headerShown: Platform.OS === "ios" ? true : false, }} /> */}
+
             <Tabs.Screen name="Status" component={StatusScreen} options={{ headerShown: true }} />
             <Tabs.Screen name="Calls" component={CallsScreen} options={{ headerShown: true }} />
             <Tabs.Screen name="Settings" component={SettingsScreen} options={{ headerShown: true }} />

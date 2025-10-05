@@ -23,91 +23,109 @@ export default function HomeScreen() {
     navigation.setOptions({
       header: () => (
         <View
-          className={`h-22 bg-white justify-center items-center flex-row shadow-2xl elevation-2xl ${Platform.OS === "android" ? `py-5` : `py-0`
+          className={`bg-white shadow-md flex-row items-center justify-between px-4 ${Platform.OS === "android" ? "pt-10 pb-3" : "pt-14 pb-4"
             }`}
+          style={{
+            elevation: 6,
+            shadowColor: "#000",
+            shadowOffset: { width: 0, height: 4 },
+            shadowOpacity: 0.15,
+            shadowRadius: 6,
+            borderBottomWidth: Platform.OS === "ios" ? 0.2 : 0,
+            borderBottomColor: "#E5E7EB",
+          }}
         >
-          <View className="items-start flex-1 mt-4 ms-3">
-            <Text className="text-2xl font-bold">ChatApp</Text>
+          {/* Left section - App title */}
+          <View className="flex-1">
+            <Text className="text-3xl font-extrabold tracking-wide text-gray-900">
+              ChatApp
+            </Text>
           </View>
-          <View className="me-3">
-            <View className="flex-row mt-4 space-x-4">
-              <TouchableOpacity className="me-5">
-                <Ionicons name="camera" size={26} color="black" />
-              </TouchableOpacity>
-              <TouchableOpacity onPress={() => setModalVisible(true)}>
-                <Ionicons name="ellipsis-vertical" size={24} color="black" />
-              </TouchableOpacity>
-              <Modal
-                animationType="fade"
-                visible={isModalVisible}
-                transparent={true}
-                onRequestClose={() => setModalVisible(false)}
 
+          {/* Right section - Icons */}
+          <View className="flex-row items-center space-x-5">
+            <TouchableOpacity
+              activeOpacity={0.7}
+              className="p-2 bg-gray-100 rounded-full"
+            >
+              <Ionicons name="camera-outline" size={26} color="#111827" />
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              activeOpacity={0.7}
+              onPress={() => setModalVisible(true)}
+              className="p-2 bg-gray-100 rounded-full"
+            >
+              <Ionicons name="ellipsis-vertical" size={24} color="#111827" />
+            </TouchableOpacity>
+          </View>
+
+          {/* Options Modal */}
+          <Modal
+            animationType="fade"
+            visible={isModalVisible}
+            transparent={true}
+            onRequestClose={() => setModalVisible(false)}
+          >
+            <Pressable
+              className="flex-1 bg-black/30"
+              onPress={() => setModalVisible(false)}
+            >
+              <Pressable
+                className="absolute right-5 top-16"
+                onPress={(e) => e.stopPropagation()}
               >
-                <Pressable
-                  className="flex-1 bg-transparent"
-                  onPress={() => {
-                    setModalVisible(false); // modal close when press outside
+                <View
+                  className="w-56 p-3 bg-white rounded-2xl"
+                  style={{
+                    shadowColor: "#000",
+                    shadowOffset: { width: 0, height: 2 },
+                    shadowOpacity: 0.25,
+                    shadowRadius: 3.84,
+                    elevation: 6,
                   }}
                 >
-                  <Pressable
-                    className="bg-white-100"
-                    onPress={(e) => {
-                      e.stopPropagation(); // prevent modal close inside of the modal
+                  {/* Profile */}
+                  <TouchableOpacity
+                    className="flex-row items-center py-3 border-b border-gray-100"
+                    onPress={() => {
+                      navigation.navigate("ProfileScreen");
+                      setModalVisible(false);
                     }}
                   >
-                    {/* root modal view */}
-                    <View className="items-end justify-end p-6">
-                      {/* content view */}
+                    <Ionicons
+                      name="person-circle-outline"
+                      size={26}
+                      color="#374151"
+                    />
+                    <Text className="ml-3 text-base font-semibold text-gray-800">
+                      My Profile
+                    </Text>
+                  </TouchableOpacity>
 
-                      <View
-                        className="p-4 bg-white w-50 rounded-3xl"
-                        style={{
-                          shadowColor: "#000",
-                          shadowOffset: { width: 0, height: 2 },
-                          shadowOpacity: 0.25,
-                          shadowRadius: 3.84,
-                          elevation: 5,
-
-                        }}
-                      >
-                        {/* Settings */}
-                        <TouchableOpacity className="flex-row items-center justify-between py-2 border-b border-gray-200"
-                          onPress={() => { navigation.navigate("SettingScreen"); setModalVisible(false); }}>
-                          <View className="flex-row items-center space-x-3">
-                            <Ionicons name="settings-outline" size={28} color="#4B5563" />
-                            <Text className="text-base font-bold text-gray-800">  Settings</Text>
-                          </View>
-                        </TouchableOpacity>
-
-                        {/* Profile */}
-                        <TouchableOpacity className="flex-row items-center justify-between py-2 border-b border-gray-200"
-                          onPress={() => { navigation.navigate("ProfileScreen"); setModalVisible(false); }}>
-                          <View className="flex-row items-center mt-3 space-x-3">
-                            <Ionicons name="person-circle-outline" size={28} color="#4B5563" />
-                            <Text className="text-base font-bold text-gray-800">  My Profile</Text>
-                          </View>
-                        </TouchableOpacity>
-
-                        {/* Log Out */}
-                        <TouchableOpacity className="flex-row items-center justify-between py-2 border-b border-gray-200"
-                          onPress={() => { if (auth) auth.signOut(); }}>
-                          <View className="flex-row items-center mt-3 space-x-3">
-                            <Ionicons name="log-out-outline" size={28} color="#4B5563" />
-                            <Text className="text-base font-bold text-gray-800">  Log Out</Text>
-                          </View>
-                        </TouchableOpacity>
-                      </View>
-                    </View>
-                  </Pressable>
-                </Pressable>
-              </Modal>
-            </View>
-          </View>
+                  {/* Logout */}
+                  <TouchableOpacity
+                    className="flex-row items-center py-3"
+                    onPress={() => {
+                      if (auth) auth.signOut();
+                    }}
+                  >
+                    <Ionicons name="log-out-outline" size={26} color="#EF4444" />
+                    <Text className="ml-3 text-base font-semibold text-red-600">
+                      Log Out
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+              </Pressable>
+            </Pressable>
+          </Modal>
         </View>
       ),
     });
   }, [navigation, isModalVisible]);
+
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
   const filteredChats = [...chatlist].filter((chat) => {
     return (
