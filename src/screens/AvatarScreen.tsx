@@ -114,7 +114,7 @@ export default function AvatarScreen() {
         <View className="w-full px-5 mt-2">
           <Pressable
             disabled={loading ? true : false}
-            className="items-center justify-center bg-green-600 rounded-full h-14"
+            className="items-center justify-center bg-purple-600 rounded-full h-14"
             onPress={async () => {
               const validProfile = validateProfileImage(
                 userData.profileImage

@@ -66,7 +66,7 @@ export default function ProfileScreen() {
               pickImage();
             }}
           >
-            <Text className="text-lg font-bold text-green-600">
+            <Text className="text-lg font-bold text-purple-600">
               Edit Profile
             </Text>
           </TouchableOpacity>

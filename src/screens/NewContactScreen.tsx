@@ -149,7 +149,7 @@ export default function NewContactScreen() {
                 </View>
                 <View className="mt-10">
                     <Pressable
-                        className="items-center justify-center bg-green-600 rounded-full h-14"
+                        className="items-center justify-center bg-purple-600 rounded-full h-14"
                         onPress={() => {
                             const firstNameValid = validateFirstName(firstName);
                             const lastNameValid = validateLastName(lastName);

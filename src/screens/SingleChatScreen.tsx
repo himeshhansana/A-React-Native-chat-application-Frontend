@@ -77,8 +77,8 @@ export default function SingleChatScreen({ route, navigation }: SingleChatScreen
       <Animated.View
         entering={isMe ? FadeInUp.springify().delay(100) : FadeInDown.springify().delay(100)}
         className={`my-1 px-4 py-2 max-w-[75%] ${isMe
-          ? "self-end bg-green-500 rounded-tl-2xl rounded-bl-2xl rounded-br-xl"
-          : "self-start bg-gray-300 rounded-tr-2xl rounded-bl-2xl rounded-br-2xl"
+          ? "self-end bg-purple-500 rounded-tl-2xl rounded-bl-2xl rounded-br-xl"
+          : "self-start bg-gray-400 rounded-tr-2xl rounded-bl-2xl rounded-br-2xl"
           }`}
         style={{
           shadowColor: "#000",
@@ -149,7 +149,7 @@ export default function SingleChatScreen({ route, navigation }: SingleChatScreen
             className="flex-1 h-auto px-5 py-2 text-base bg-gray-100 min-h-14 max-h-32 rounded-3xl"
           />
           <TouchableOpacity
-            className="items-center justify-center ml-2 bg-green-500 rounded-full shadow-md w-14 h-14"
+            className="items-center justify-center ml-2 bg-purple-500 rounded-full shadow-md w-14 h-14"
             onPress={handleSendChat}
             activeOpacity={0.7}
           >

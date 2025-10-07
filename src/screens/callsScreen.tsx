@@ -165,7 +165,7 @@ export default function CallsScreen() {
                 <TouchableOpacity onPress={() => setSelectedTab("all")}>
                     <Text
                         className={`font-semibold ${selectedTab === "all"
-                            ? "text-green-600"
+                            ? "text-purple-600"
                             : "text-gray-500 dark:text-gray-300"
                             }`}
                     >
@@ -176,7 +176,7 @@ export default function CallsScreen() {
                 <TouchableOpacity onPress={() => setSelectedTab("missed")}>
                     <Text
                         className={`font-semibold ${selectedTab === "missed"
-                            ? "text-green-600"
+                            ? "text-purple-600"
                             : "text-gray-500 dark:text-gray-300"
                             }`}
                     >
@@ -209,7 +209,7 @@ export default function CallsScreen() {
 
             {/* FAB */}
             <TouchableOpacity
-                className="absolute items-center justify-center bg-green-600 rounded-full shadow-lg bottom-6 right-6 w-14 h-14"
+                className="absolute items-center justify-center bg-purple-600 rounded-full shadow-lg bottom-6 right-6 w-14 h-14"
                 style={{
                     shadowColor: "#3B82F6",
                     shadowOffset: { width: 0, height: 4 },

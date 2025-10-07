@@ -1,72 +1,3 @@
-// import { useEffect } from "react";
-// import { Image, StatusBar, Text, View } from "react-native";
-// import Animated, { useAnimatedStyle, useSharedValue, withTiming, } from "react-native-reanimated";
-// import { SafeAreaView } from "react-native-safe-area-context";
-// import "../../global.css";
-// import CircleShape from "../components/CircleShape";
-// import { useNavigation } from "@react-navigation/native";
-// import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-// import { RootStack } from "../../App";
-// import { runOnJS } from "react-native-worklets";
-// import { useTheme } from "../theme/ThemeProvider";
-// import { useWebSocketPing } from "../socket/UseWebSocketPing";
-
-// type Props = NativeStackNavigationProp<RootStack, "SplashScreen">;
-
-// export default function SplashScreen() {
-//   const navigation = useNavigation<Props>();
-//   const opacity = useSharedValue(0);
-//   useWebSocketPing(40000); // 1000 * 40
-//   useEffect(() => {
-//     opacity.value = withTiming(1, { duration: 3000 });
-//   }, [navigation, opacity]);
-
-//   const animatedStyle = useAnimatedStyle(() => {
-//     return { opacity: opacity.value };
-//   });
-
-//   const { applied } = useTheme();
-//   const logo =
-//     applied === "light"
-//       ? require("../../assets/logo-dark.png")
-//       : require("../../assets/logo.png");
-
-//   return (
-//     <SafeAreaView className="items-center justify-center flex-1 bg-slate-50 ">
-//       <StatusBar hidden={true} />
-//       <CircleShape
-//         width={200}
-//         height={200}
-//         borderRadius={999}
-//         className="bg-slate-900"
-//         topValue={-50}
-//         leftValue={-20}
-//       />
-//       <CircleShape
-//         width={200}
-//         height={200}
-//         borderRadius={999}
-//         className="bg-slate-900"
-//         topValue={-20}
-//         leftValue={90}
-//       />
-//       <Animated.View style={animatedStyle}>
-//         <Image source={logo} style={{ height: 200, width: 220 }} />
-//       </Animated.View>
-
-//       <Animated.View className="absolute bottom-10" style={animatedStyle}>
-//         <View className="items-center justify-center">
-//           <Text className="text-xs font-bold text-slate-600 ">
-//             POWERED BY: {process.env.EXPO_PUBLIC_APP_OWNER}
-//           </Text>
-//           <Text className="text-xs font-bold text-slate-600 ">
-//             VERSION: {process.env.EXPO_PUBLIC_APP_VERSION}
-//           </Text>
-//         </View>
-//       </Animated.View>
-//     </SafeAreaView>
-//   );
-// }
 
 import { useEffect } from "react";
 import { Image, StatusBar, Text, View } from "react-native";
@@ -98,11 +29,11 @@ export default function SplashScreen() {
   const { applied } = useTheme();
 
   useEffect(() => {
-    opacity.value = withTiming(1, { duration: 2200 });
+    opacity.value = withTiming(1, { duration: 3200 });
 
     // Create soft pulse animation for the logo
     pulse.value = withRepeat(
-      withSequence(withTiming(1.05, { duration: 2000 }), withTiming(1, { duration: 2000 })),
+      withSequence(withTiming(1.05, { duration: 3000 }), withTiming(1, { duration: 3000 })),
       -1,
       true
     );
@@ -115,13 +46,13 @@ export default function SplashScreen() {
 
   const logo =
     applied === "light"
-      ? require("../../assets/logo-dark.png")
-      : require("../../assets/logo.png");
+      ? require("../../assets/logo11.png")
+      : require("../../assets/logo11.png");
 
   const gradientColors: readonly [string, string, ...string[]] =
     applied === "light"
-      ? ["#DCE35B", "#45B649"] // Fresh green-yellow gradient
-      : ["#0f0c29", "#302b63", "#24243e"]; // Deep dark violet tone
+      ? ["#6B46C1", "#553C9A", "#4C1D95"] // Dark purple gradient for light mode
+      : ["#2D1B69", "#1E1B4B", "#312E81"]; // Very dark purple gradient for dark mode
 
   return (
     <SafeAreaView className="flex-1">
@@ -138,7 +69,7 @@ export default function SplashScreen() {
       <View className="items-center justify-center flex-1">
         <Animated.View style={animatedStyle}>
           <BlurView
-            intensity={60}
+            intensity={70}
             tint={applied === "light" ? "light" : "dark"}
             className="items-center justify-center w-56 h-56 overflow-hidden rounded-full"
           >
@@ -158,16 +89,14 @@ export default function SplashScreen() {
           style={{ opacity: opacity.value }}
         >
           <Text
-            className={`text-4xl font-extrabold tracking-wide ${
-              applied === "light" ? "text-slate-800" : "text-white"
-            }`}
+            className={`text-5xl font-extrabold tracking-wide ${applied === "light" ? "text-white" : "text-white"
+              }`}
           >
-            ChatApp
+            Chatify
           </Text>
           <Text
-            className={`mt-2 text-base font-medium ${
-              applied === "light" ? "text-slate-600" : "text-gray-300"
-            }`}
+            className={`mt-2 text-base font-2xl ${applied === "light" ? "text-white" : "text-gray-200"
+              }`}
           >
             Let’s talk with the world 🌍
           </Text>
@@ -180,16 +109,14 @@ export default function SplashScreen() {
         style={{ opacity: opacity.value }}
       >
         <Text
-          className={`text-xs font-semibold ${
-            applied === "light" ? "text-slate-700" : "text-gray-300"
-          }`}
+          className={`text-lg font-semibold ${applied === "light" ? "text-white" : "text-white"
+            }`}
         >
           POWERED BY: {process.env.EXPO_PUBLIC_APP_OWNER}
         </Text>
         <Text
-          className={`text-xs font-semibold ${
-            applied === "light" ? "text-slate-700" : "text-gray-300"
-          }`}
+          className={`text-lg font-semibold ${applied === "light" ? "text-white" : "text-white"
+            }`}
         >
           VERSION: {process.env.EXPO_PUBLIC_APP_VERSION}
         </Text>

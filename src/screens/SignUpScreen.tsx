@@ -41,12 +41,12 @@ export default function SignUpScreen() {
     <KeyboardAvoidingView
       behavior={Platform.OS === "android" ? "padding" : "height"}
       keyboardVerticalOffset={Platform.OS === "android" ? 100 : 100}
-      className="flex-1 items-center "
+      className="items-center flex-1 "
     >
-      <SafeAreaView className="justify-center items-center p-5">
+      <SafeAreaView className="items-center justify-center p-5">
         <StatusBar hidden={true} />
         <Image source={logo} className="h-40 w-36" />
-        <View className="w-full justify-start items-start">
+        <View className="items-start justify-start w-full">
           <Text className="font-bold text-slate-500 ">
             Create your account and start the conversation TODAY
           </Text>
@@ -78,9 +78,9 @@ export default function SignUpScreen() {
           </View>
         </View>
       </SafeAreaView>
-      <View className="mt-1 w-full px-5">
+      <View className="w-full px-5 mt-1">
         <Pressable
-          className="bg-green-600 h-14 justify-center items-center rounded-full"
+          className="items-center justify-center bg-purple-600 rounded-full h-14"
           onPress={() => {
             let validFirstName = validateFirstName(userData.firstName);
             let validLastName = validateLastName(userData.lastName);
@@ -103,7 +103,7 @@ export default function SignUpScreen() {
             }
           }}
         >
-          <Text className="text-slate-100  font-bold text-lg">Next</Text>
+          <Text className="text-lg font-bold text-slate-100">Next</Text>
         </Pressable>
       </View>
     </KeyboardAvoidingView>

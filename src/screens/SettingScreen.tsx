@@ -58,7 +58,7 @@ export default function SettingScreen() {
             {options.map((option) => (
               <TouchableOpacity
                 key={option}
-                className={`py-2 px-5 rounded-full mb-2 ${preference === option ? "bg-green-600" : "bg-gray-200"
+                className={`py-2 px-5 rounded-full mb-2 ${preference === option ? "bg-purple-600" : "bg-gray-200"
                   }`}
                 onPress={() => setPreference(option)}
               >

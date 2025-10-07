@@ -109,7 +109,7 @@ export default function StatusScreen() {
           className={`p-0.5 rounded-full ${
             item.viewed 
               ? "border-gray-300 dark:border-gray-600" 
-              : "border-green-500"
+              : "border-purple-500"
           } border-2`}
         >
           <Image source={item.avatar} className="rounded-full w-14 h-14" />
@@ -117,7 +117,7 @@ export default function StatusScreen() {
         
         {/* Online indicator */}
         {item.isOnline && (
-          <View className="absolute bottom-0 right-0 w-4 h-4 bg-green-500 border-2 border-white rounded-full dark:border-gray-900" />
+          <View className="absolute bottom-0 right-0 w-4 h-4 bg-purple-500 border-2 border-white rounded-full dark:border-gray-900" />
         )}
         
         {/* Status type indicator */}
@@ -202,7 +202,7 @@ export default function StatusScreen() {
       contentContainerStyle={{ paddingRight: 20 }}
     >
       <TouchableOpacity 
-        className="bg-green-500 rounded-2xl p-4 mr-3 items-center justify-center min-w-[80px]"
+        className="bg-red-500 rounded-2xl p-4 mr-3 items-center justify-center min-w-[80px]"
         activeOpacity={0.8}
       >
         <Ionicons name="camera" size={24} color="white" />
@@ -330,7 +330,7 @@ export default function StatusScreen() {
 
       {/* Floating Action Button */}
       <TouchableOpacity 
-        className="absolute items-center justify-center bg-green-600 rounded-full shadow-lg bottom-6 right-6 w-14 h-14"
+        className="absolute items-center justify-center bg-purple-600 rounded-full shadow-lg bottom-6 right-6 w-14 h-14"
         style={{ 
           shadowColor: '#16A34A',
           shadowOffset: { width: 0, height: 4 },

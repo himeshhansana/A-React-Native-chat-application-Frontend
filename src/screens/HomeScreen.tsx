@@ -38,7 +38,7 @@ export default function HomeScreen() {
           {/* Left section - App title */}
           <View className="flex-1">
             <Text className="text-3xl font-extrabold tracking-wide text-gray-900">
-              ChatApp
+              Chatify
             </Text>
           </View>
 
@@ -178,7 +178,7 @@ export default function HomeScreen() {
           <Text className='items-center flex-1 text-gray-500'
             numberOfLines={1} ellipsizeMode='tail'>{item.lastMessage}</Text>
           {item.unreadCount > 0 && (
-            <View className='px-2 py-2 bg-green-500 rounded-full ms-2'>
+            <View className='px-2 py-2 bg-purple-500 rounded-full ms-2'>
               <Text className='text-xs font-bold text-slate-50'>{item.unreadCount}</Text>
             </View>
           )}
@@ -196,7 +196,7 @@ export default function HomeScreen() {
       <View className='mt-1'>
         <FlatList data={filteredChats} renderItem={renderItem} contentContainerStyle={{ paddingBottom: 80 }} />
       </View>
-      <View className='absolute bg-green-500 bottom-10 right-6 rounded-3xl'>
+      <View className='absolute bg-purple-500 bottom-10 right-6 rounded-3xl'>
         <TouchableOpacity className='items-center justify-center w-20 h-20 rounded-3xl'
           onPress={() => navigation.navigate("NewChatScreen")}>
           <Ionicons name='chatbox-ellipses' size={24} color='black' />

@@ -129,7 +129,7 @@ export default function NewChatsScreen() {
                 {/* New Contact Button */}
                 <View className="px-4 py-3 mt-4">
                     <TouchableOpacity
-                        className="flex-row items-center justify-center w-full bg-green-600 rounded-full shadow-md h-14"
+                        className="flex-row items-center justify-center w-full bg-purple-600 rounded-full shadow-md h-14"
                         activeOpacity={0.8}
                         onPress={() => navigation.navigate("NewContactScreen")}
                     >

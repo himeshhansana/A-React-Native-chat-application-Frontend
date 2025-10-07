@@ -21,7 +21,7 @@ export default function HomeTabs() {
                 return <Ionicons name={iconName} size={size} color={color} />;
             },
             tabBarLabelStyle: { fontSize: 13 },
-            tabBarActiveTintColor: 'green',
+            tabBarActiveTintColor: 'purple',
             tabBarInactiveTintColor: 'black',
             headerShown: false,
             tabBarStyle: {
