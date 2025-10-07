@@ -128,6 +128,7 @@ function ChatApp() {
                   <Stack.Screen
                     name="NewContactScreen"
                     component={NewContactScreen}
+                  options={{ headerShown: false }}
                   />
                   <Stack.Screen
                     name="SignOutScreen"

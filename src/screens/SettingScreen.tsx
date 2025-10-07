@@ -154,7 +154,7 @@ export default function SettingScreen() {
           >
             <View className="flex-row items-center space-x-3">
               <MaterialIcons name="info-outline" size={26} color="#3b82f6" />
-              <Text className={`text-lg ${textColor}`}> About ChatApp</Text>
+              <Text className={`text-lg ${textColor}`}> About Chatify</Text>
             </View>
             <Feather name="chevron-right" size={22} color="#6b7280" />
           </TouchableOpacity>

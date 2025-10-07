@@ -30,8 +30,8 @@ export default function SignUpScreen() {
   const { applied } = useTheme();
   const logo =
     applied === "light"
-      ? require("../../assets/logo-dark.png")
-      : require("../../assets/logo.png");
+      ? require("../../assets/logo11.png")
+      : require("../../assets/logo11.png");
 
   const { userData, setUserData } = useUserRegistration();
   const [firstName, setFirstName] = useState("");

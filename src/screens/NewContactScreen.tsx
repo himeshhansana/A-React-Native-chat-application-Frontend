@@ -79,7 +79,17 @@ export default function NewContactScreen() {
     return (
         <SafeAreaView className="flex-1 bg-white">
             <View className="flex-1 px-5">
-                <View className="flex-row items-center gap-x-2 h-14">
+                {/* Header Section */}
+                <View className="py-6 border-b border-gray-200">
+                    <Text className="text-2xl font-bold text-center text-gray-800">
+                        Add New Contact
+                    </Text>
+                    <Text className="mt-1 text-sm text-center text-gray-500">
+                        Enter contact details to add them to your contacts
+                    </Text>
+                </View>
+                
+                <View className="flex-row items-center mt-6 gap-x-2 h-14">
                     <Feather name="user" size={24} color="black" />
                     <View className="flex-1 h-14">
                         <FloatingLabelInput

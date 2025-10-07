@@ -54,7 +54,7 @@ export default function AvatarScreen() {
       <View className="items-center flex-1 ">
         <View>
           <Image
-            source={require("../../assets/logo.png")}
+            source={require("../../assets/logo11.png")}
             className="h-40 w-36"
           />
         </View>
