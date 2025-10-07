@@ -37,7 +37,7 @@ export default function HomeScreen() {
         >
           {/* Left section - App title */}
           <View className="flex-1">
-            <Text className="text-3xl font-extrabold tracking-wide text-gray-900">
+            <Text className="text-3xl italic font-extrabold tracking-wide text-purple-800">
               Chatify
             </Text>
           </View>
@@ -190,7 +190,7 @@ export default function HomeScreen() {
   return (
     <SafeAreaView className='flex-1 p-0' edges={["right", "bottom", "left"]}>
       <View className='flex-row items-center px-3 mx-2 mt-3 bg-gray-300 rounded-full h-14'>
-        <Ionicons name='search' size={24} color='gray' />
+        <Ionicons name='search' size={24} color='purple' />
         <TextInput onChangeText={setSearch} className='flex-1 text-lg font-bold ps-2' placeholder='Search' />
       </View>
       <View className='mt-1'>

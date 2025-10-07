@@ -24,7 +24,7 @@ export default function SplashScreen() {
   const navigation = useNavigation<Props>();
   const opacity = useSharedValue(0);
   const pulse = useSharedValue(1);
-  useWebSocketPing(40000); // ✅ Keep backend logic
+  useWebSocketPing(30000); // ✅ Keep backend logic
 
   const { applied } = useTheme();
 

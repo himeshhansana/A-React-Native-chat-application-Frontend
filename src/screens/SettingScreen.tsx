@@ -132,7 +132,7 @@ export default function SettingScreen() {
           className={`px-5 py-4 border-t border-gray-200 ${bgColor}`}
         >
           <TouchableOpacity
-            onPress={() => { }}
+            onPress={() => navigation.navigate("PrivacySettingsScreen")}
             className="flex-row items-center justify-between"
           >
             <View className="flex-row items-center space-x-3">
@@ -149,7 +149,7 @@ export default function SettingScreen() {
           className={`px-5 py-4 border-t border-gray-200 ${bgColor}`}
         >
           <TouchableOpacity
-            onPress={() => { }}
+            onPress={() => navigation.navigate("AboutScreen")}
             className="flex-row items-center justify-between"
           >
             <View className="flex-row items-center space-x-3">

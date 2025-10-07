@@ -6,7 +6,9 @@ import SignUpScreen from "./src/screens/SignUpScreen";
 import SignInScreen from "./src/screens/SignInScreen";
 import HomeScreen from "./src/screens/HomeScreen";
 import ProfileScreen from "./src/screens/ProfileScreen";
+import AboutScreen from "./src/screens/AboutScreen";
 import SettingScreen from "./src/screens/SettingScreen";
+import PrivacySettingsScreen from "./src/screens/PrivacySettingsScreen";
 import { ThemeProvider } from "./src/theme/ThemeProvider";
 import ContactScreen from "./src/screens/ContactScreen";
 import AvatarScreen from "./src/screens/AvatarScreen";
@@ -30,7 +32,9 @@ export type RootStack = {
   SignInScreen: undefined;
   HomeScreen: undefined;
   ProfileScreen: undefined;
+  AboutScreen: undefined;
   SettingScreen: undefined;
+  PrivacySettingsScreen: undefined;
   SingleChatScreen: {
     chatId: number;
     friendName: string;
@@ -106,8 +110,16 @@ function ChatApp() {
                     component={ProfileScreen}
                   />
                   <Stack.Screen
+                    name="AboutScreen"
+                    component={AboutScreen}
+                  />
+                  <Stack.Screen
                     name="SettingScreen"
                     component={SettingScreen}
+                  />
+                  <Stack.Screen
+                    name="PrivacySettingsScreen"
+                    component={PrivacySettingsScreen}
                   />
                   <Stack.Screen
                     name="NewChatScreen"
