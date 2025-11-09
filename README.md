@@ -1,4 +1,4 @@
-# ChatApp
+# A React Native chat application
 
 A React Native chat application built with Expo and Tailwind (NativeWind). This repo contains the mobile app source code, socket helpers, screens, and utilities for a simple chat experience.
 
